@@ -1,0 +1,10 @@
+[
+  {
+    "type":"octane.Authentication",
+    "url":"https://some.octane-server.com",
+    "client_id":"Client ID",
+    "client_secret":"secret",
+    "title":"HPE ALM Octane",
+    "id":"Configuration/Custom/Configuration73232263"
+  }
+]

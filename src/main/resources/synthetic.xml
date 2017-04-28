@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+    THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS
+    FOR A PARTICULAR PURPOSE. THIS CODE AND INFORMATION ARE NOT SUPPORTED BY XEBIALABS.
+-->
+<synthetic xsi:schemaLocation="http://www.xebialabs.com/deployit/synthetic synthetic.xsd"
+           xmlns="http://www.xebialabs.com/deployit/synthetic"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <!-- HPE ALM Octane Authentication Configuration -->
+    <type type="octane.Authentication" extends="xlrelease.Configuration">
+        <property name="url" label="HPE ALM Octane Server" required="true" description="HPE ALM Octane Server URL." default=""/>
+        <property name="client_id" label="Client ID" required="true" description="HPE ALM Octane Client ID."/>
+        <property name="client_secret" label="Client Secret" required="true" password="true" description="HPE ALM Octane Client ID."/>
+    </type>
+
+    <!-- HipChat Task Configurations -->
+    <type type="octane.Task" extends="xlrelease.PythonScript" virtual="true">
+        <property name="scriptLocation" default="octane/OctaneTask.py" hidden="true"/>
+        <property name="iconLocation" default="octane/octane-logo.png" hidden="true"/>
+        <property name="octane_authentication" category="input" label="Octane Authentication" referenced-type="octane.Authentication" kind="ci" required="true" description="HPE ALM Octane Authentication."/>
+        <property name="shared_space_uid" label="Shared Space UID" category="input" required="true"/>
+        <property name="workspace_id" label="Workspace ID" category="input" required="true"/>
+        <property name="output" category="output" kind="string" size="large" label="Output" description="The output returned from execution of the Octane task."/>
+    </type>
+
+    <type type="octane.GetEpics" extends="octane.Task"/>
+</synthetic>
+

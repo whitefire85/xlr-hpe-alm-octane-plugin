@@ -1,0 +1,143 @@
+[
+  {
+    "id":"Applications\/Release885681033",
+    "type":"xlrelease.Release",
+    "$createdBy":"admin",
+    "$createdAt":"2017-04-27T09:26:31.843-0600",
+    "$lastModifiedBy":"admin",
+    "$lastModifiedAt":"2017-04-28T09:18:39.320-0600",
+    "title":"HPE ALM Octane",
+    "scheduledStartDate":"2017-04-27T09:00:00-06:00",
+    "flagStatus":"OK",
+    "maxConcurrentReleases":100,
+    "releaseTriggers":[
+
+    ],
+    "teams":[
+      {
+        "id":"Applications\/Release885681033\/Team623082990",
+        "type":"xlrelease.Team",
+        "teamName":"Release Admin",
+        "members":[
+
+        ],
+        "roles":[
+
+        ],
+        "permissions":[
+          "release#edit",
+          "release#start",
+          "release#reassign_task",
+          "template#view",
+          "release#edit_security",
+          "release#abort",
+          "release#view",
+          "release#edit_task"
+        ]
+      },
+      {
+        "id":"Applications\/Release885681033\/Team142021652",
+        "type":"xlrelease.Team",
+        "teamName":"Template Owner",
+        "members":[
+          "admin"
+        ],
+        "roles":[
+
+        ],
+        "permissions":[
+          "template#edit",
+          "template#view",
+          "template#edit_triggers",
+          "template#edit_security",
+          "template#create_release"
+        ]
+      }
+    ],
+    "memberViewers":[
+
+    ],
+    "roleViewers":[
+
+    ],
+    "attachments":[
+
+    ],
+    "phases":[
+      {
+        "id":"Applications\/Release885681033\/Phase793521018",
+        "type":"xlrelease.Phase",
+        "$createdBy":"admin",
+        "$createdAt":"2017-04-27T09:26:31.918-0600",
+        "$lastModifiedBy":"admin",
+        "$lastModifiedAt":"2017-04-28T09:11:41.321-0600",
+        "title":"Testing",
+        "flagStatus":"OK",
+        "tasks":[
+          {
+            "id":"Applications\/Release885681033\/Phase793521018\/Task217816775",
+            "type":"xlrelease.CustomScriptTask",
+            "$createdBy":"admin",
+            "$createdAt":"2017-04-28T09:11:41.000-0600",
+            "$lastModifiedBy":"admin",
+            "$lastModifiedAt":"2017-04-28T09:18:39.266-0600",
+            "title":"Get Epics",
+            "flagStatus":"OK",
+            "comments":[
+
+            ],
+            "container":"Applications\/Release885681033\/Phase793521018",
+            "attachments":[
+
+            ],
+            "status":"PLANNED",
+            "overdueNotified":false,
+            "waitForScheduledStartDate":true,
+            "hasBeenFlagged":false,
+            "hasBeenDelayed":false,
+            "failuresCount":0,
+            "variableMapping":{
+
+            },
+            "tags":[
+
+            ],
+            "pythonScript":{
+              "id":"Applications\/Release885681033\/Phase793521018\/Task217816775\/PythonScript",
+              "type":"octane.GetEpics",
+              "$createdBy":"admin",
+              "$createdAt":"2017-04-28T09:11:41.002-0600",
+              "$lastModifiedBy":"admin",
+              "$lastModifiedAt":"2017-04-28T09:18:39.267-0600",
+              "customScriptTask":"Applications\/Release885681033\/Phase793521018\/Task217816775",
+              "octane_authentication":"Configuration\/Custom\/Configuration73232263",
+              "shared_space_uid":"112057",
+              "workspace_id":"1002"
+            }
+          }
+        ],
+        "release":"Applications\/Release885681033",
+        "status":"PLANNED",
+        "color":"#009CDB"
+      }
+    ],
+    "queryableStartDate":"2017-04-27T09:00:00-06:00",
+    "realFlagStatus":"OK",
+    "status":"TEMPLATE",
+    "tags":[
+
+    ],
+    "variables":[
+
+    ],
+    "calendarPublished":false,
+    "tutorial":false,
+    "abortOnFailure":false,
+    "allowConcurrentReleasesFromTrigger":true,
+    "runningTriggeredReleasesCount":0,
+    "createdFromTrigger":false,
+    "extensions":[
+
+    ]
+  }
+]
