@@ -4,8 +4,8 @@
 # FOR A PARTICULAR PURPOSE. THIS CODE AND INFORMATION ARE NOT SUPPORTED BY XEBIALABS.
 #
 
-import json, requests
-from requests import Request, Session
+import requests
+from requests import Request
 
 class OctaneClient(object):
     def __init__(self, octane_authentication):
