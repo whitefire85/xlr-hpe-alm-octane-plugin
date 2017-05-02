@@ -26,9 +26,11 @@ apply plugin: 'maven'
 version='1.0.0-beta'
 
 license {
-    header rootProject.file('src/main/license/xebialabs_community.license')
+    header rootProject.file('License.md')
     strictCheck false
     excludes(["**/*.json", "**/requests/*"])
+    ext.year = Calendar.getInstance().get(Calendar.YEAR)
+    ext.name = 'XEBIALABS'
 }
 
 jython {
