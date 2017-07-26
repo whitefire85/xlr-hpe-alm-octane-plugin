@@ -10,6 +10,7 @@
 [xlr-bitbucket-plugin-license-url]: https://opensource.org/licenses/MIT
 [xlr-bitbucket-plugin-downloads-image]: https://img.shields.io/github/downloads/xebialabs-community/xlr-hpe-alm-octane-plugin/total.svg
 
+
 ## Preface
 This document describes the functionality provided by the `xlr-hpe-alm-octane-plugin`
 
@@ -19,17 +20,22 @@ This module offers a basic interface to HPE ALM Octane functionality.
 ## Installation
 Copy the plugin JAR file into the `SERVER_HOME/plugins` directory of XL Release.
 
-## Octane Authentication CI
+## Octane Workspace
 Defines the information about the Octane server you wish to connect to. You must have the Client ID and Client Secret from the server to access the REST API.
 
 ![OctaneSharedConfigurationItem](images/octane_shared_config.png)
 
 ## Octane Tasks
 
-### Get Epics
-The Get Epics task will retrieve a list of Epic objects from the specified shared space and workspace.
+### Create Feature Defect
+The Create Feature Defect task will create a defect for the specified feature.
 
-![OctaneGetEpics](images/octane_get_epics.png)
+![OctaneCreateFeatureDefect](images/octane_create_feature_defect.png)
+
+### Feature Defects Gate
+The Feature Defects Gates finds all defects with the specified phase for a feature. The gate will fail when the desired condition is not met.
+
+![OctaneFeatureDefectsGate](images/octane_feature_defect_gate.png)
 
 ---
 

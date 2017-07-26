@@ -9,10 +9,26 @@
 #
 
 from octane.Octane import OctaneClient
+from markdown_logger import MarkdownLogger as mdl
+import json
+octane = OctaneClient.get_client(octane_workspace)
+feature_id = octane.resolve_entity_id("features", featureName)
 
-octane = OctaneClient.get_client(octane_authentication)
-method = str(task.getTaskType()).lower().replace('.', '_')
-call = getattr(octane, method)
-response = call(locals())
-for key,value in response.items():
-    locals()[key] = value
+request_body = {
+  "data": [
+    {
+      "name": defectName,
+      "description": defectDescription,
+      "parent": {
+        "type": "feature",
+        "id": feature_id["id"]
+      }
+    }
+  ]
+}
+
+response = octane.get_response_for_endpoint("POST", "defects", "Failed to create defect.", json_data=request_body)
+defectId = response["data"][0]["id"]
+defectUrl = octane.generate_defect_url(defectId)
+
+mdl.println("[Defect %s](%s) created." % (defectId, defectUrl))
