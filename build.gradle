@@ -20,10 +20,11 @@ xlDocker {
 defaultTasks 'build'
 apply plugin: "com.github.hierynomus.jython"
 apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: 'eclipse'
-apply plugin: 'maven'
 version='1.0.1-beta'
+
+sourceSets.main.resources.srcDirs = ["src/main/jython", "src/main/resources"]
+sourceSets.test.resources.srcDirs = ["src/test/jython", "src/test/resources"]
+
 
 license {
     header rootProject.file('License.md')
