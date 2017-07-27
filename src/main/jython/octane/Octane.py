@@ -30,11 +30,22 @@ class OctaneClient(object):
         # https://mqast001pngx.saas.hpe.com/ui/?p=190188/1002#/product-overview/hierarchy/defects?selectedEntities=%5B%222001%22%5D
         return "%s/ui?p=%s/%s#/product-overview/hierarchy/defects?selectedEntities=[\"%s\"]" % (self.url, self.shared_space_uid, self.workspace_id, defect_id)
 
+    def generate_test_run_url(self, run_id):
+        #https://mqast001pngx.saas.hpe.com/ui/?p=190188/1002#/product-overview/hierarchy/tests-in-pa?selectedEntities=%5B%221001%22%5D
+        return "%s/ui?p=%s/%s#/product-overview/hierarchy/defects?selectedEntities=[\"%s\"]" % (self.url, self.shared_space_uid, self.workspace_id, run_id)
+
     def get_defect_phases(self):
         query_result = self.query("phases", "logical_name EQ ^phase.defect.*^", ["name"])
         lookup = {}
         for phase in query_result["data"]:
             lookup[phase["name"]] = phase["id"]
+        return lookup
+
+    def get_manual_run_native_statuses(self):
+        query_result = self.query("list_nodes", "logical_name EQ ^list_node.run_native_status*^", ["name"])
+        lookup = {}
+        for s in query_result["data"]:
+            lookup[s["name"]] = s["id"]
         return lookup
 
     def get_defects_in_phase_for_feature(self, feature_id, phase_ids=[], negate=False, limit=20):

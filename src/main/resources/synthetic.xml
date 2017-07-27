@@ -47,5 +47,24 @@
         </property>
     </type>
 
+    <type type="octane.CreateManualTestRun" extends="octane.Task">
+        <property name="runName" category="input" required="true" description="Name of this test run."/>
+        <property name="testName" category="input" required="true" description="Name of the manual test. Wildcard can be used, but must resolve to a single instance."/>
+        <property name="releaseName" category="input" required="true" description="Name of the release to associate this run with. Wildcard can be used, but must resolve to a single instance."/>
+        <property name="status" kind="enum" category="input" default="Not Complete" description="Test run status">
+            <enum-values>
+                <value>Passed</value>
+                <value>Failed</value>
+                <value>Skipped</value>
+                <value>Not Complete</value>
+                <value>Planned</value>
+                <value>Blocked</value>
+            </enum-values>
+        </property>
+        <property name="runDescription" category="input" required="true"  size="large"/>
+        <property name="runId" category="output" />
+        <property name="runUrl" category="output" />
+    </type>
+
 </synthetic>
 

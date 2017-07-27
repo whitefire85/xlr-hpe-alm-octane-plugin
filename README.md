@@ -37,6 +37,13 @@ The Feature Defects Gates finds all defects with the specified phase for a featu
 
 ![OctaneFeatureDefectsGate](images/octane_feature_defect_gate.png)
 
+### Create Manual Test Run
+The Create Manual Test Run for a manual test. 
+
+![OctaneFeatureDefectsGate](images/octane_create_manual_test_run.png)
+
+
+
 ---
 
 ## References:

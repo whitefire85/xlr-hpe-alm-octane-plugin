@@ -3,3 +3,6 @@
 build
 supervisord.log
 supervisord.pid
+out
+build
+*$py.class
