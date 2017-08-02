@@ -26,6 +26,7 @@
     <type type="octane.CreateDefect" extends="octane.Task">
         <property name="taskColor" hidden="true" default="#FF9E3B"/>
         <property name="defectName" category="input" required="true"/>
+        <property name="releaseName" category="input" required="true" description="Name of the release to associate this run with. Wildcard can be used, but must resolve to a single instance."/>
         <property name="defectDescription" category="input" required="true"  size="large"/>
         <property name="defectId" category="output" />
         <property name="defectUrl" category="output" />

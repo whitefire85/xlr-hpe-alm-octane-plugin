@@ -13,6 +13,7 @@ from markdown_logger import MarkdownLogger as mdl
 import json
 octane = OctaneClient.get_client(octane_workspace)
 feature_id = octane.resolve_entity_id("work_items", "Backlog")
+release_id = octane.resolve_entity_id("releases", releaseName)
 endpoint = 'list_nodes?query="(list_root={logical_name = ^list_node.item_origin^ })"'
 origin_list_nodes = octane.get_response_for_endpoint('GET', endpoint, "Could not execute query.")
 if origin_list_nodes["total_count"] <= 1:
@@ -30,6 +31,10 @@ if item_origin is None:
         "parent": {
           "type": "work_item",
           "id": feature_id["id"]
+        },
+        "release": {
+          "type": "release",
+          "id": release_id["id"]
         }
       }
     ]
@@ -47,6 +52,10 @@ else:
         "parent": {
           "type": "work_item",
           "id": feature_id["id"]
+        },
+        "release": {
+          "type": "release",
+          "id": release_id["id"]
         }
       }
     ]
