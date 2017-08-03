@@ -25,7 +25,6 @@
 
     <type type="octane.CreateFeatureDefect" extends="octane.Task">
         <property name="taskColor" hidden="true" default="#FF9E3B"/>
-        <property name="featureName" category="input" required="true" description="Name of the feature. Wildcard can be used, but must resolve to a single instance."/>
         <property name="defectName" category="input" required="true"/>
         <property name="defectDescription" category="input" required="true"  size="large"/>
         <property name="defectId" category="output" />
@@ -34,7 +33,6 @@
 
     <type type="octane.FeatureDefectsGate" extends="octane.Task">
         <property name="taskColor" hidden="true" default="#DD4B39"/>
-        <property name="featureName" category="input" required="true" description="Name of the feature. Wildcard can be used, but must resolve to a single instance."/>
         <property name="queryDefectPhases" category="input" kind="list_of_string" required="false" default="New, Deferred, Opened"/>
         <property name="negateQuery" kind="boolean" category="input" default="false" description="When true, defects must not have any of the desire phases."/>
         <property name="threshold" kind="integer" category="input" default="0"/>
