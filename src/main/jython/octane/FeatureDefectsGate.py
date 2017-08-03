@@ -36,7 +36,7 @@ def fail_gate(msg):
 
 octane = OctaneClient.get_client(octane_workspace)
 phase_ids = convert_phase_names_to_ids(octane, queryDefectPhases)
-feature_id = octane.resolve_entity_id("features", featureName)
+feature_id = octane.resolve_entity_id("work_items", "Backlog")
 
 response = octane.get_defects_in_phase_for_feature(feature_id["id"], phase_ids, negate=negateQuery, limit=1)
 total_count = response["total_count"]

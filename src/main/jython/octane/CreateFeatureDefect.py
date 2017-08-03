@@ -12,20 +12,45 @@ from octane.Octane import OctaneClient
 from markdown_logger import MarkdownLogger as mdl
 import json
 octane = OctaneClient.get_client(octane_workspace)
-feature_id = octane.resolve_entity_id("features", featureName)
-
-request_body = {
-  "data": [
-    {
-      "name": defectName,
-      "description": defectDescription,
-      "parent": {
-        "type": "feature",
-        "id": feature_id["id"]
+feature_id = octane.resolve_entity_id("work_items", "Backlog")
+endpoint = 'list_nodes?query="(list_root={logical_name = ^list_node.item_origin^ })"'
+origin_list_nodes = octane.get_response_for_endpoint('GET', endpoint, "Could not execute query.")
+if origin_list_nodes["total_count"] <= 1:
+  raise Exception("Cannot resolve list_nodes with root name list_node.item_origin")
+item_origin = None
+for list_node in origin_list_nodes["data"]:
+  if list_node["name"] == "Xebia":
+    item_origin = list_node
+if item_origin is None:
+  request_body = {
+    "data": [
+      {
+        "name": defectName,
+        "description": defectDescription,
+        "parent": {
+          "type": "work_item",
+          "id": feature_id["id"]
+        }
       }
-    }
-  ]
-}
+    ]
+  }
+else:
+  request_body = {
+    "data": [
+      {
+        "name": defectName,
+        "description": defectDescription,
+        "item_origin": {
+          "type": "list_node",
+          "id": item_origin["id"]
+        },
+        "parent": {
+          "type": "work_item",
+          "id": feature_id["id"]
+        }
+      }
+    ]
+  }
 
 response = octane.get_response_for_endpoint("POST", "defects", "Failed to create defect.", json_data=request_body)
 defectId = response["data"][0]["id"]
