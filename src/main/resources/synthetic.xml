@@ -23,7 +23,7 @@
         <property name="octane_workspace" category="input" label="Octane Workspace" referenced-type="octane.Workspace" kind="ci" required="true" description="HPE ALM Octane Workspace."/>
     </type>
 
-    <type type="octane.CreateFeatureDefect" extends="octane.Task">
+    <type type="octane.CreateDefect" extends="octane.Task">
         <property name="taskColor" hidden="true" default="#FF9E3B"/>
         <property name="defectName" category="input" required="true"/>
         <property name="defectDescription" category="input" required="true"  size="large"/>
@@ -31,10 +31,11 @@
         <property name="defectUrl" category="output" />
     </type>
 
-    <type type="octane.FeatureDefectsGate" extends="octane.Task">
+    <type type="octane.DefectsGate" extends="octane.Task">
         <property name="taskColor" hidden="true" default="#DD4B39"/>
+        <property name="releaseName" category="input" required="true" description="Name of the release. Wildcard can be used, but must resolve to a single instance."/>
         <property name="queryDefectPhases" category="input" kind="list_of_string" required="false" default="New, Deferred, Opened"/>
-        <property name="negateQuery" kind="boolean" category="input" default="false" description="When true, defects must not have any of the desire phases."/>
+        <property name="queryDefectSeverity" category="input" kind="list_of_string" required="false" default="Low, Medium, High, Very High, Critical"/>
         <property name="threshold" kind="integer" category="input" default="0"/>
         <property name="thresholdOperator" kind="enum" category="input" default="EQ">
           <enum-values>

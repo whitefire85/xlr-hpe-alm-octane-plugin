@@ -26,9 +26,9 @@ class OctaneClient(object):
     def get_client(octane_workspace):
         return OctaneClient(octane_workspace)
 
-    def generate_defect_url(self, defect_id):
+    def generate_defect_url(self, parent_id):
         # https://mqast001pngx.saas.hpe.com/ui/?p=190188/1002#/product-overview/hierarchy/defects?selectedEntities=%5B%222001%22%5D
-        return "%s/ui?p=%s/%s#/product-overview/hierarchy/defects?selectedEntities=[\"%s\"]" % (self.url, self.shared_space_uid, self.workspace_id, defect_id)
+        return "%s/ui?p=%s/%s#/product-overview/hierarchy/defects?selectedEntities=[\"%s\"]" % (self.url, self.shared_space_uid, self.workspace_id, parent_id)
 
     def generate_test_run_url(self, run_id):
         #https://mqast001pngx.saas.hpe.com/ui/?p=190188/1002#/product-overview/hierarchy/tests-in-pa?selectedEntities=%5B%221001%22%5D
@@ -41,6 +41,13 @@ class OctaneClient(object):
             lookup[phase["name"]] = phase["id"]
         return lookup
 
+    def get_defect_severity(self):
+        query_result = self.query("list_nodes", "logical_name EQ ^list_node.severity.*^", ["name"])
+        lookup = {}
+        for phase in query_result["data"]:
+            lookup[phase["name"]] = phase["id"]
+        return lookup
+
     def get_manual_run_native_statuses(self):
         query_result = self.query("list_nodes", "logical_name EQ ^list_node.run_native_status*^", ["name"])
         lookup = {}
@@ -48,16 +55,17 @@ class OctaneClient(object):
             lookup[s["name"]] = s["id"]
         return lookup
 
-    def get_defects_in_phase_for_feature(self, feature_id, phase_ids=[], negate=False, limit=20):
+    def get_defects_in_phase_for_release_by_severity(self, release_id, phase_ids=[], severity_ids=[], limit=20):
         #"parent EQ {id EQ 3001};((phase EQ {id EQ 1002})||(phase EQ {id EQ 1001}))"
-        query = "parent EQ {id EQ %s}" % feature_id
+        query = "release EQ {id EQ %s}" % release_id
         if len(phase_ids) > 0:
             phase_query = ["(phase EQ {id EQ %s})" % p for p in phase_ids]
             phase_query_string = "||".join(phase_query)
-            if not negate:
-                query = "%s;(%s)" % (query, phase_query_string)
-            else:
-                query = "%s;!(%s)" % (query, phase_query_string)
+            query = "%s;(%s)" % (query, phase_query_string)
+        if len(severity_ids) > 0:
+            severity_query = ["(severity EQ {id EQ %s})" % s for s in severity_ids]
+            severity_query_string = "||".join(severity_query)
+            query = "%s;(%s)" % (query, severity_query_string)
         mdl.println(query)
         query_result = self.query("defects", query, ["id","name"], limit=limit)
         return query_result

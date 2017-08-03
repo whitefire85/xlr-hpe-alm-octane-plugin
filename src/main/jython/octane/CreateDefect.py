@@ -54,6 +54,6 @@ else:
 
 response = octane.get_response_for_endpoint("POST", "defects", "Failed to create defect.", json_data=request_body)
 defectId = response["data"][0]["id"]
-defectUrl = octane.generate_defect_url(defectId)
+defectUrl = octane.generate_defect_url(feature_id)
 
 mdl.println("[Defect %s](%s) created." % (defectId, defectUrl))

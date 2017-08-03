@@ -10,7 +10,6 @@
 
 from octane.Octane import OctaneClient
 from markdown_logger import MarkdownLogger as mdl
-import json
 
 
 def convert_phase_names_to_ids(octane, phase_names):
@@ -22,12 +21,30 @@ def convert_phase_names_to_ids(octane, phase_names):
             phase_ids.append(defect_phases[phase_name])
         else:
             invalid_phase_names.append(phase_name)
+
     if len(invalid_phase_names) > 0:
         mdl.print_header3("Invalid phase names detected.")
         mdl.println("Phase names %s do not exist." % invalid_phase_names)
         mdl.println("Available phase names are %s" % defect_phases.keys())
         raise Exception("Invalid phase names")
     return phase_ids
+
+
+def convert_severity_names_to_ids(octane, severity_names):
+    invalid_severity_names = []
+    severity_ids = []
+    defect_severities = octane.get_defect_severity()
+    for severity_name in severity_names:
+        if severity_name in defect_severities.keys():
+            severity_ids.append(defect_severities[severity_name])
+        else:
+            invalid_severity_names.append(severity_name)
+    if len(invalid_severity_names) > 0:
+        mdl.print_header3("Invalid severity names detected.")
+        mdl.println("severity names %s do not exist." % invalid_severity_names)
+        mdl.println("Available severity names are %s" % severity_names.keys())
+        raise Exception("Invalid severity names")
+    return severity_ids
 
 def fail_gate(msg):
     mdl.println(msg)
@@ -36,9 +53,10 @@ def fail_gate(msg):
 
 octane = OctaneClient.get_client(octane_workspace)
 phase_ids = convert_phase_names_to_ids(octane, queryDefectPhases)
-feature_id = octane.resolve_entity_id("work_items", "Backlog")
+severity_ids = convert_severity_names_to_ids(octane, queryDefectSeverity)
+release_id = octane.resolve_entity_id("releases", releaseName)
 
-response = octane.get_defects_in_phase_for_feature(feature_id["id"], phase_ids, negate=negateQuery, limit=1)
+response = octane.get_defects_in_phase_for_release_by_severity(release_id["id"], phase_ids, severity_ids, limit=1)
 total_count = response["total_count"]
 
 if thresholdOperator == "EQ" and threshold == total_count:
