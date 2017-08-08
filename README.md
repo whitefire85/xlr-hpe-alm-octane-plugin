@@ -33,9 +33,9 @@ The Create Defect task will create a defect linked to the root backlog.
 ![OctaneCreateDefect](images/octane_create_defect.png)
 
 ### Feature Defects Gate
-The Feature Defects Gates finds all defects with the specified phase for a feature. The gate will fail when the desired condition is not met.
+The Defects Gate finds all defects with the specified phase and severities for a release. The gate will fail when the desired condition is not met.
 
-![OctaneFeatureDefectsGate](images/octane_feature_defect_gate.png)
+![OctaneDefectsGate](images/octane_defect_gate.png)
 
 ### Create Manual Test Run
 The Create Manual Test Run for a manual test.
