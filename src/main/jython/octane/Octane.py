@@ -26,9 +26,9 @@ class OctaneClient(object):
     def get_client(octane_workspace):
         return OctaneClient(octane_workspace)
 
-    def generate_defect_url(self, parent_id):
-        # https://mqast001pngx.saas.hpe.com/ui/?p=190188/1002#/product-overview/hierarchy/defects?selectedEntities=%5B%222001%22%5D
-        return "%s/ui?p=%s/%s#/product-overview/hierarchy/defects?selectedEntities=[\"%s\"]" % (self.url, self.shared_space_uid, self.workspace_id, parent_id)
+    def generate_entity_url(self, entity_type, entity_id):
+        #https://mqast001pngx.saas.hpe.com/ui/entity-navigation?p=190188/1002&entityType=work_item&id=5002
+        return "%s/ui/entity-navigation?p=%s/%s&entityType=%s&id=%s" % (self.url, self.shared_space_uid, self.workspace_id, entity_type, entity_id)
 
     def generate_test_run_url(self, run_id):
         #https://mqast001pngx.saas.hpe.com/ui/?p=190188/1002#/product-overview/hierarchy/tests-in-pa?selectedEntities=%5B%221001%22%5D
