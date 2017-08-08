@@ -66,7 +66,6 @@ class OctaneClient(object):
             severity_query = ["(severity EQ {id EQ %s})" % s for s in severity_ids]
             severity_query_string = "||".join(severity_query)
             query = "%s;(%s)" % (query, severity_query_string)
-        mdl.println(query)
         query_result = self.query("defects", query, ["id","name"], limit=limit)
         return query_result
 

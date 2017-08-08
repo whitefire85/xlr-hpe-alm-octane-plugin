@@ -58,12 +58,11 @@ release_id = octane.resolve_entity_id("releases", releaseName)
 
 response = octane.get_defects_in_phase_for_release_by_severity(release_id["id"], phase_ids, severity_ids, limit=1)
 total_count = response["total_count"]
-
-if thresholdOperator == "EQ" and threshold == total_count:
-    fail_gate("Gate failed because threshold [%s] matches defects found [%s]" % (threshold, total_count))
+if thresholdOperator == "EQ" and threshold != total_count:
+    fail_gate("Gate failed because threshold %s does not match number of defects found %s" % (threshold, total_count))
 elif thresholdOperator == "GT" and threshold > total_count:
-    fail_gate("Gate failed because threshold [%s] is greater than total defects found [%s]" % (threshold, total_count))
+    fail_gate("Gate failed because threshold %s is greater than total defects found %s" % (threshold, total_count))
 elif thresholdOperator == "LT" and threshold < total_count:
-    fail_gate("Gate failed because threshold [%s] is less than total defects found [%s]" % (threshold, total_count))
+    fail_gate("Gate failed because threshold %s is less than total defects found %s" % (threshold, total_count))
 
 mdl.println("Condition satified.  threshold %s %s %s defects found." % (threshold, thresholdOperator, total_count))
